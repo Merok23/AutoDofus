@@ -5,32 +5,33 @@ machine learning, but for now the idea is to make a script that will
 record your actions for a given time and then save them in a csv so you can
 then use it to fish automatically.
 """
-from pynput.mouse import Button, Controller as MouseController
-from pynput.keyboard import Key, Controller as KeyboardController, Listener
 import csv
 import time
+from pynput.mouse import Button, Controller as MouseController
+from pynput.keyboard import Key, Controller as KeyboardController, Listener
 
 # Initialize controllers for keyboard and mouse
 keyboard_controller = KeyboardController()
 mouse_controller = MouseController()
-FILE_PATH = 'recorded_events.csv'
-paused = False
+FILE_PATH = "recorded_events.csv"
+
 
 def on_press(key):
-    global paused
+    """
+    Function dedicated to handle key press events.
+    :param key: key that was pressed
+    """
+    return not key == Key.esc
 
-    if key == Key.f1:
-        if not paused:
-            paused = True
-            print("Script paused")
-        else:
-            paused = False
-            print("Resuming script")
-    if key == Key.esc:
-        # Stop listener
-        return False
 
 def smooth_mouse_move(start_pos, end_pos, duration):
+    """
+    This function will perform a smooth mouse movement from start_pos to
+    end_pos in the given duration.
+    :param start_pos: tuple of (x, y) start position
+    :param end_pos: tuple of (x, y) end position
+    :param duration: duration of the movement in seconds
+    """
     # Calculate the number of steps for the given duration
     steps = 50
     sleep_time = duration / steps
@@ -46,21 +47,29 @@ def smooth_mouse_move(start_pos, end_pos, duration):
         mouse_controller.position = (new_x, new_y)
         time.sleep(sleep_time)
 
+
 def on_release(key):
-    pass
+    """
+    We do nothing on key release for now.
+    """
+    print(f"{key} released")
+
 
 def press_key(event):
+    """
+    Custom function that will press and release a key.
+    """
     keyboard_controller.press(event[2])
     keyboard_controller.release(event[2])
 
+
 def read_events(reader):
+    """
+    Function dedicated to read and execute events from the CSV file.
+    """
     start_time = time.time()
     for event in reader:
-        if paused:
-            while paused:
-                time.sleep(0.1)
-
-        if event[0] == 'key_press':
+        if event[0] == "key_press":
             press_key(event)
         else:
             current_time = time.time()
@@ -70,11 +79,13 @@ def read_events(reader):
             if remaining_time > 0:
                 time.sleep(remaining_time)
             mouse_position = (int(event[3]), int(event[4]))
-            smooth_mouse_move(mouse_controller.position, mouse_position, float(event[1]))
+            smooth_mouse_move(
+                mouse_controller.position, mouse_position, float(event[1])
+            )
 
-            if event[5] == 'left':
+            if event[5] == "left":
                 mouse_controller.click(Button.left)
-            elif event[5] == 'right':
+            elif event[5] == "right":
                 mouse_controller.click(Button.right)
             else:
                 mouse_controller.click(Button.middle)
@@ -84,11 +95,10 @@ def read_events(reader):
 # Create listener for keyboard events
 with Listener(on_press=on_press, on_release=on_release) as listener:
     # Read and execute events from the CSV file
-    with open(FILE_PATH, 'r') as f:
-        reader = csv.reader(f)
+    with open(FILE_PATH, "r", encoding="uft-8") as file:
+        csv_reader = csv.reader(file)
         # Skip the header row
-        next(reader)
-        read_events(reader)
-        
-    listener.join()
+        next(csv_reader)
+        read_events(csv_reader)
 
+    listener.join()
