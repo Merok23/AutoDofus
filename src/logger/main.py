@@ -4,9 +4,9 @@ This is the main file, it receives the map coordinates by command line arguments
 and runs the map_logger
 """
 import sys
-from map_logger import MapLogger
+from src.logger.map_logger import MapLogger
 
-DIRECTORY_PATH = "./maps"
+DIRECTORY_PATH = "./src/logger/maps"
 
 
 def main():

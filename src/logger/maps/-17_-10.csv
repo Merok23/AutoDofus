@@ -1,0 +1,15 @@
+event_type,event_subtype,event_data,event_time
+mouse,click,1078;742;left;True,1.4685006141662598
+mouse,click,1078;742;left;False,0.05951189994812012
+mouse,click,300;321;left;True,0.8039460182189941
+mouse,click,300;321;left;False,0.10818791389465332
+mouse,click,290;448;left;True,0.65509033203125
+mouse,click,290;448;left;False,0.11680126190185547
+mouse,click,382;387;left;True,0.5279295444488525
+mouse,click,382;387;left;False,0.09221339225769043
+mouse,click,292;276;left;True,0.41351771354675293
+mouse,click,292;276;left;False,0.1100001335144043
+mouse,click,290;429;left;True,0.46625471115112305
+mouse,click,290;429;left;False,0.12243938446044922
+mouse,click,363;402;left;True,0.4490940570831299
+mouse,click,363;402;left;False,0.12883591651916504

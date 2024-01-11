@@ -4,7 +4,7 @@ Class used to store the logic of the logger.
 """
 import time
 from pynput import keyboard, mouse
-from event import Event
+from src.common.event import Event
 
 
 class Logger:
@@ -80,8 +80,15 @@ class Logger:
         with open(file_path, "w", encoding="utf-8") as file:
             file.write("event_type,event_subtype,event_data,event_time\n")
             for event in self._events:
-                file.write(f"{event.event_type},{event.event_subtype}")
-                file.write(f",{event.event_data},{event.event_time}\n")
+                file.write(f"{event.event_type},{event.event_subtype},")
+                if event.event_type == "keyboard":
+                    file.write(f"{event.event_data},")
+                else:
+                    for data in event.event_data:
+                        file.write(f"{data};")
+                    # remove last ';'
+                    file.seek(file.tell() - 1, 0)
+                file.write(f",{event.event_time}\n")
 
     def start_logging(self):
         """
