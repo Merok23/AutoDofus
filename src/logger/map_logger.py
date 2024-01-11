@@ -3,7 +3,7 @@
 Map logger class.
 It's used to create a single csv of a single map using the logger.
 """
-from event_logger import Logger
+from src.logger.event_logger import Logger
 
 
 class MapLogger:
