@@ -13,7 +13,7 @@ from pynput.keyboard import Key, Controller as KeyboardController, Listener
 # Initialize controllers for keyboard and mouse
 keyboard_controller = KeyboardController()
 mouse_controller = MouseController()
-FILE_PATH = "recorded_events.csv"
+FILE_PATH = "../logger/recorded_events.csv"
 
 
 def on_press(key):
