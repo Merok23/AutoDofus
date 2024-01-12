@@ -19,7 +19,6 @@ class Player:
         :param events: list of events
         """
         self.events = events
-        print(events[1])
 
     def play(self):
         """
@@ -28,7 +27,7 @@ class Player:
         current_time = time.time()
         for event in self.events:
             if event.get_event_type() == "keyboard":
-                self._play_keyboard_event(event)
+                # We ignore the keyboard events for now
                 time.sleep(event.get_event_time())
             else:
                 self._play_mouse_event(event)
@@ -62,14 +61,9 @@ class Player:
             pass
 
         # click:
-        print("Position x: ", event_data[0])
-        print("Position y: ", event_data[1])
-        print("Duration: ", event.get_event_time())
         # NEEDS TO BE DEBUGGED:
         self.__move_mouse(event_data[0], event_data[1], event.get_event_time())
-        # mouse.Controller().position = (event_data[0], event_data[1])
-        # mouse.Controller().click(mouse.Button.left, 1)
-        # time.sleep(event.get_event_time())
+        mouse.Controller().click(mouse.Button.left, 1)
 
     def __move_mouse(self, x_position, y_position, duration):
         """
@@ -80,15 +74,17 @@ class Player:
         :param duration: duration of the movement in seconds
         """
         # Calculate the number of steps for the given duration
-        steps = 50
-        sleep_time = duration / steps
-
+        # steps = 50
+        # sleep_time = duration / steps
         # Calculate the distance to move in each step
-        delta_x = (x_position - mouse.Controller().position[0]) / steps
-        delta_y = (y_position - mouse.Controller().position[1]) / steps
+        # delta_x = (x_position - mouse.Controller().position[0]) / steps
+        # delta_y = (y_position - mouse.Controller().position[1]) / steps
 
-        for i in range(steps):
-            new_x = mouse.Controller().position[0] + delta_x * (i + 1)
-            new_y = mouse.Controller().position[1] + delta_y * (i + 1)
-            mouse.Controller().position = (new_x, new_y)
-            time.sleep(sleep_time)
+        # for i in range(steps):
+        #     new_x = mouse.Controller().position[0] + delta_x * (i + 1)
+        #     new_y = mouse.Controller().position[1] + delta_y * (i + 1)
+        #     mouse.Controller().position = (new_x, new_y)
+        #     time.sleep(sleep_time)
+
+        mouse.Controller().position = (x_position, y_position)
+        time.sleep(duration)

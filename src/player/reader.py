@@ -35,13 +35,16 @@ class Reader:
             for row in csv_reader:
                 event_type = row[0]
                 event_subtype = row[1]
-                if event_subtype == "keyboard":
+                if event_type == "keyboard":
                     event_data = row[2]
+                    event_time = float(row[4])
                 else:
                     event_data = row[2].split(";")
+                    if event_data[3] == "False":
+                        continue
                     event_data = event_data[:-2]
                     event_data = [int(data) for data in event_data]
-                event_time = float(row[3])
+                    event_time = float(row[3])
                 events.append(Event(event_type, event_subtype, event_data, event_time))
         return events
 

@@ -2,6 +2,7 @@
 """
 This class contains the logic of clycling through the maps.
 """
+import time
 from src.common.event import Event
 from src.player.reader import Reader
 from src.player.player import Player
@@ -23,6 +24,7 @@ class MapCycler:
         """
         self.map_coordinates = map_coordinates
         self.csv_reader = Reader(map_coordinates)
+        self.player = Player([])
         self.finished = False
 
     def start(self):
@@ -31,11 +33,14 @@ class MapCycler:
         """
         while not self.finished:
             events = self.csv_reader.read_events()
-            player = Player(events)
-            player.play()
+            self.player = Player(events)
+            self.player.play()
             last_event = events[-1]
             next_map = self._calculate_next_map(last_event, self.map_coordinates)
+            self.map_coordinates = next_map
             self.csv_reader = Reader(next_map)
+            # We wait for the map to load:
+            time.sleep(10)
 
     def stop(self):
         """
@@ -74,5 +79,5 @@ class MapCycler:
         if min_distance == x_distance_to_right:
             return (map_coordinates[0] + 1, map_coordinates[1])  # right
         if min_distance == y_distance_to_top:
-            return (map_coordinates[0], map_coordinates[1] + 1)  # top
-        return (map_coordinates[0], map_coordinates[1] - 1)  # bottom
+            return (map_coordinates[0], map_coordinates[1] - 1)  # top
+        return (map_coordinates[0], map_coordinates[1] + 1)  # bottom

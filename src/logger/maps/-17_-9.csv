@@ -1,15 +1,9 @@
 event_type,event_subtype,event_data,event_time
-mouse,click,(547, 80, 'left', True),1.3053395748138428
-mouse,click,(547, 80, 'left', False),0.10006141662597656
-mouse,click,(671, 416, 'left', True),2.379890203475952
-mouse,click,(671, 416, 'left', False),0.09982681274414062
-mouse,click,(717, 573, 'left', True),1.0050842761993408
-mouse,click,(717, 573, 'left', False),0.08976531028747559
-mouse,click,(1115, 295, 'left', True),6.594963788986206
-mouse,click,(1115, 295, 'left', False),0.08031558990478516
-mouse,click,(720, 565, 'left', True),1.1297552585601807
-mouse,click,(720, 565, 'left', False),0.08982205390930176
-mouse,click,(729, 574, 'left', True),2.760254383087158
-mouse,click,(729, 574, 'left', False),0.09035515785217285
-mouse,click,(1140, 431, 'left', True),4.393572092056274
-mouse,click,(1140, 431, 'left', False),0.10531449317932129
+keyboard,press,Key.alt_l,,0.14217209815979004
+keyboard,press,Key.tab,,0.2422497272491455
+keyboard,release,Key.alt_l,,0.10800743103027344
+keyboard,release,Key.tab,,0.003973484039306641
+mouse,click,742;562;left;True,1.041935682296753
+mouse,click,742;562;left;False,0.08504509925842285
+mouse,click,7;420;left;True,9.795545816421509
+mouse,click,7;420;left;False,0.12932634353637695

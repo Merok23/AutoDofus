@@ -18,9 +18,12 @@ class Event:
     def __init__(self, event_type, event_subtype, event_data, event_time):
         self.event_type = event_type
         self.event_subtype = event_subtype
-        for data in event_data:
-            if data not in ["left", "right", "middle"]:
-                data = int(data)
+        if event_type == "keyboard":
+            pass
+        else:
+            for data in event_data:
+                if data not in ["left", "right", "middle"]:
+                    data = int(data)
         self.event_data = event_data
         self.event_time = event_time
 

@@ -1,0 +1,7 @@
+event_type,event_subtype,event_data,event_time
+keyboard,press,Key.alt_l,,0.4835073947906494
+keyboard,press,Key.tab,,0.1718425750732422
+keyboard,release,Key.alt_l,,0.09358644485473633
+keyboard,release,Key.tab,,0.010002613067626953
+mouse,click,725;25;left;True,3.128746747970581
+mouse,click,725;25;left;False,0.10350561141967773
